@@ -25,6 +25,7 @@ body{
 }
 
 header{padding:26px}
+
 h1{margin:0;font-size:30px;font-weight:900}
 header p{margin:6px 0 14px;color:#94a3b8;font-size:13px}
 
@@ -64,6 +65,7 @@ header p{margin:6px 0 14px;color:#94a3b8;font-size:13px}
 .row.top2{background:linear-gradient(90deg,#2f2f2f,#020617)}
 .row.top3{background:linear-gradient(90deg,#3b1f00,#020617)}
 
+/* RANK + SKIN */
 .rank-skin{
  position:relative;
  width:120px;
@@ -86,9 +88,9 @@ header p{margin:6px 0 14px;color:#94a3b8;font-size:13px}
  background:#111827;
 }
 
-.top1 .rank-box{background:#3b2f00;color:var(--gold)}
-.top2 .rank-box{background:#2f2f2f;color:var(--silver)}
-.top3 .rank-box{background:#3b1f00;color:var(--bronze)}
+.top1 .rank-box{color:var(--gold)}
+.top2 .rank-box{color:var(--silver)}
+.top3 .rank-box{color:var(--bronze)}
 
 .skin{
  width:64px;
@@ -133,13 +135,11 @@ header p{margin:6px 0 14px;color:#94a3b8;font-size:13px}
  gap:4px;
  font-size:11px;
  font-weight:900;
- transition:.2s;
 }
-.pill:hover{transform:scale(1.12)}
 
 .icon-img{
- width:28px;
- height:28px;
+ width:22px;
+ height:22px;
  image-rendering:pixelated;
 }
 
@@ -149,7 +149,12 @@ header p{margin:6px 0 14px;color:#94a3b8;font-size:13px}
 .lt2{color:#38bdf8}
 .ht3{color:#fb7185}
 
-footer{text-align:center;padding:18px;font-size:12px;color:#64748b}
+footer{
+ text-align:center;
+ padding:18px;
+ font-size:12px;
+ color:#64748b
+}
 </style>
 </head>
 
@@ -177,16 +182,15 @@ footer{text-align:center;padding:18px;font-size:12px;color:#64748b}
 <footer>© 2026 · MCTiers Style</footer>
 
 <script>
-/* ICONOS MINECRAFT (FUNCIONAN 100%) */
 const icons={
- classic:'https://mc-heads.net/item/diamond_sword',
- uhc:'https://mc-heads.net/item/golden_apple',
- bedfight:'https://mc-heads.net/item/red_bed',
- gapple:'https://mc-heads.net/item/golden_apple',
- soup:'https://mc-heads.net/item/mushroom_stew',
- axepvp:'https://mc-heads.net/item/iron_axe',
- nodebuff:'https://mc-heads.net/item/potion',
- sumo:'https://mc-heads.net/item/lead'
+ classic:'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.1/assets/minecraft/textures/item/diamond_sword.png',
+ uhc:'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.1/assets/minecraft/textures/item/golden_apple.png',
+ bedfight:'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.1/assets/minecraft/textures/item/red_bed.png',
+ gapple:'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.1/assets/minecraft/textures/item/enchanted_golden_apple.png',
+ soup:'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.1/assets/minecraft/textures/item/mushroom_stew.png',
+ axepvp:'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.1/assets/minecraft/textures/item/diamond_axe.png',
+ nodebuff:'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.1/assets/minecraft/textures/item/potion.png',
+ sumo:'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.1/assets/minecraft/textures/item/lead.png'
 };
 
 const score={HT1:1,LT1:2,HT2:3,LT2:4,HT3:5};
@@ -204,7 +208,8 @@ function render(){
  const box=document.getElementById('list');
  box.innerHTML='';
  let list=[...players];
- if(currentMode!=='overall') list.sort((a,b)=>score[a.tiers[currentMode]]-score[b.tiers[currentMode]]);
+ if(currentMode!=='overall')
+  list.sort((a,b)=>score[a.tiers[currentMode]]-score[b.tiers[currentMode]]);
 
  list.forEach((p,i)=>{
   box.innerHTML+=`
@@ -224,18 +229,17 @@ function render(){
    <div class="region"><span>NA</span></div>
 
    <div class="tiers">
-    ${
-     currentMode==='overall'
-     ? Object.entries(p.tiers).map(([m,t])=>`
-      <div class="pill ${t.toLowerCase()}">
-       <img class="icon-img" src="${icons[m]}">
-       <div>${t}</div>
-      </div>`).join('')
-     : `<div class="pill ${p.tiers[currentMode].toLowerCase()}">
+    ${currentMode==='overall'
+      ? Object.entries(p.tiers).map(([m,t])=>`
+       <div class="pill ${t.toLowerCase()}">
+        <img class="icon-img" src="${icons[m]}">
+        <div>${t}</div>
+       </div>`).join('')
+      : `
+       <div class="pill ${p.tiers[currentMode].toLowerCase()}">
         <img class="icon-img" src="${icons[currentMode]}">
         <div>${p.tiers[currentMode]}</div>
-       </div>`
-    }
+       </div>`}
    </div>
   </div>`;
  });
