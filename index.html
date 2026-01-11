@@ -1,165 +1,276 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>MCTiers – Overall</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCTiers – Overall Rankings</title>
 
-  <!-- ICONOS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+body{
+  margin:0;
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  background:linear-gradient(180deg,#0b1220,#020617);
+  color:#eaeaea;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-    }
+header{
+  padding:24px 28px;
+}
 
-    body {
-      margin: 0;
-      background: linear-gradient(180deg, #020617, #0f172a);
-      color: white;
-    }
+header h1{
+  margin:0;
+  font-size:28px;
+  font-weight:900;
+}
 
-    header {
-      padding: 30px;
-      text-align: center;
-    }
+header p{
+  margin:6px 0 0;
+  color:#94a3b8;
+  font-size:13px;
+}
 
-    header h1 {
-      font-size: 32px;
-      font-weight: 900;
-      margin: 0;
-    }
+.tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
 
-    header p {
-      color: #94a3b8;
-      margin-top: 8px;
-      font-size: 14px;
-    }
+.tab{
+  padding:8px 14px;
+  border-radius:999px;
+  background:#020617;
+  border:1px solid #1e293b;
+  color:#94a3b8;
+  font-weight:800;
+  font-size:13px;
+  cursor:pointer;
+  transition:.2s;
+}
 
-    /* CONTENEDOR PRINCIPAL */
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      padding: 30px;
-      max-width: 1000px;
-      margin: auto;
-    }
+.tab:hover,.tab.active{
+  background:#1e293b;
+  color:#fff;
+}
 
-    /* TARJETAS */
-    .card {
-      background: linear-gradient(135deg, #020617, #020617);
-      border-radius: 20px;
-      padding: 26px;
-      border: 1px solid #1e293b;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      animation: fadeUp 0.6s ease both;
-    }
+.container{
+  padding:20px 28px;
+}
 
-    .card:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 0 30px rgba(56, 189, 248, 0.35);
-      border-color: #38bdf8;
-    }
+.row{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  background:linear-gradient(90deg,#0f172a,#020617);
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:14px;
+  animation:fade .3s ease;
+}
 
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(56,189,248,0.25), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
+@keyframes fade{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:none}
+}
 
-    .card:hover::before {
-      opacity: 1;
-    }
+.num{
+  width:32px;
+  font-size:20px;
+  font-weight:900;
+  color:#facc15;
+  text-align:center;
+}
 
-    .icon {
-      font-size: 36px;
-      margin-bottom: 14px;
-      color: #38bdf8;
-    }
+.player{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  min-width:260px;
+}
 
-    .card h2 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 900;
-    }
+.avatar{
+  width:52px;
+  height:52px;
+  border-radius:12px;
+  overflow:hidden;
+  background:#020617;
+  border:1px solid #1e293b;
+}
 
-    .card p {
-      margin-top: 10px;
-      font-size: 14px;
-      color: #94a3b8;
-      line-height: 1.5;
-    }
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 12px;
-      color: #64748b;
-    }
+.player-name{
+  font-weight:900;
+  font-size:16px;
+}
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+.subtitle{
+  font-size:12px;
+  color:#94a3b8;
+}
+
+.region{
+  margin-left:auto;
+  margin-right:24px;
+}
+
+.region span{
+  background:#7f1d1d;
+  color:#fecaca;
+  font-weight:800;
+  font-size:11px;
+  padding:6px 12px;
+  border-radius:999px;
+}
+
+.tiers{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#020617;
+  border:1px solid #1e293b;
+  font-size:12px;
+  font-weight:800;
+}
+
+.icon{
+  font-size:14px;
+}
+
+/* COLORES DE RANGO */
+.ht1{color:#22c55e}
+.lt1{color:#facc15}
+.ht2{color:#a855f7}
+.lt2{color:#38bdf8}
+.ht3{color:#fb7185}
+
+footer{
+  padding:16px;
+  text-align:center;
+  font-size:12px;
+  color:#64748b;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>MCTiers – Overall Rankings</h1>
-  <p>Server IP: mcpvp.club</p>
+  <h1>Overall Rankings</h1>
+  <p>Server IP: <strong>mcpvp.club</strong></p>
+
+  <div class="tabs">
+    <div class="tab active" data-mode="overall">Overall</div>
+    <div class="tab" data-mode="classic">Classic</div>
+    <div class="tab" data-mode="uhc">UHC</div>
+    <div class="tab" data-mode="bedfight">Bedfight</div>
+    <div class="tab" data-mode="gapple">Gapple</div>
+    <div class="tab" data-mode="soup">Soup</div>
+    <div class="tab" data-mode="axepvp">AxePvP</div>
+    <div class="tab" data-mode="nodebuff">NoDebuff</div>
+    <div class="tab" data-mode="sumo">Sumo</div>
+  </div>
 </header>
 
-<div class="container">
+<div class="container" id="list"></div>
 
-  <!-- OVERALL -->
-  <div class="card" onclick="openMode('overall')">
-    <div class="icon"><i class="fa-solid fa-trophy"></i></div>
-    <h2>Overall</h2>
-    <p>Ranking general basado en todos los modos PvP.</p>
-  </div>
-
-  <!-- BEDFIGHT -->
-  <div class="card" onclick="openMode('bedfight')">
-    <div class="icon"><i class="fa-solid fa-bed"></i></div>
-    <h2>BedFight</h2>
-    <p>Combate estratégico defendiendo y destruyendo camas.</p>
-  </div>
-
-  <!-- AXEPVP -->
-  <div class="card" onclick="openMode('axepvp')">
-    <div class="icon"><i class="fa-solid fa-hammer"></i></div>
-    <h2>AxePvP</h2>
-    <p>PvP técnico usando hacha y timing perfecto.</p>
-  </div>
-
-</div>
-
-<footer>
-  © 2026 · MCTiers Style · Made with ❤️
-</footer>
+<footer>© 2026 · MCTiers Style</footer>
 
 <script>
-  function openMode(mode) {
-    alert("Abrir ranking de: " + mode.toUpperCase());
-    // aquí luego conectamos los rankings reales
-  }
+const icons={
+ classic:'⚔️',
+ uhc:'❤️',
+ bedfight:'🛏️',
+ gapple:'🍎',
+ soup:'🍲',
+ axepvp:'🪓',
+ nodebuff:'🧪',
+ sumo:'🧵'
+};
+
+const score={HT1:1,LT1:2,HT2:3,LT2:4,HT3:5};
+
+const players=[
+ {name:'ThungBelly',tiers:{classic:'HT1',uhc:'LT1',bedfight:'LT1',gapple:'HT1',soup:'LT1',axepvp:'LT1',nodebuff:'HT1',sumo:'HT1'}},
+ {name:'22jaze',tiers:{classic:'LT1',uhc:'HT1',bedfight:'HT1',gapple:'LT1',soup:'HT1',axepvp:'HT1',nodebuff:'LT1',sumo:'LT1'}},
+ {name:'AbrahamMeloyo_',tiers:{classic:'HT2',uhc:'HT2',bedfight:'HT2',gapple:'HT2',soup:'HT2',axepvp:'HT2',nodebuff:'HT2',sumo:'HT2'}},
+ {name:'Know_exe',tiers:{classic:'LT2',uhc:'LT2',bedfight:'HT3',gapple:'LT2',soup:'LT2',axepvp:'HT3',nodebuff:'LT2',sumo:'LT2'}}
+];
+
+function render(mode){
+ const box=document.getElementById('list');
+ box.innerHTML='';
+ let list=[...players];
+
+ if(mode!=='overall'){
+  list.sort((a,b)=>{
+    const ta=a.tiers[mode]||'HT3';
+    const tb=b.tiers[mode]||'HT3';
+    return score[ta]-score[tb];
+  });
+ }
+
+ list.forEach((p,i)=>{
+  box.innerHTML+=`
+  <div class="row">
+    <div class="num">${i+1}</div>
+
+    <div class="player">
+      <div class="avatar">
+        <img src="https://mc-heads.net/avatar/${p.name}/64">
+      </div>
+      <div>
+        <div class="player-name">${p.name}</div>
+        <div class="subtitle">Combat Player</div>
+      </div>
+    </div>
+
+    <div class="region"><span>NA</span></div>
+
+    <div class="tiers">
+      ${
+        mode==='overall'
+        ? Object.entries(p.tiers).map(([m,t])=>`
+          <div class="pill">
+            <span class="icon">${icons[m]}</span>
+            <span class="${t.toLowerCase()}">${t}</span>
+          </div>
+        `).join('')
+        : `
+          <div class="pill">
+            <span class="icon">${icons[mode]}</span>
+            <span class="${p.tiers[mode].toLowerCase()}">${p.tiers[mode]}</span>
+          </div>
+        `
+      }
+    </div>
+  </div>`;
+ });
+}
+
+render('overall');
+
+document.querySelectorAll('.tab').forEach(tab=>{
+ tab.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  render(tab.dataset.mode);
+ };
+});
 </script>
 
 </body>
 </html>
+
