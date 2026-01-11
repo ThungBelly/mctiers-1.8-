@@ -3,201 +3,237 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MCTiers – Overall Rankings</title>
+<title>MCTiers – Rankings</title>
+
+<script src="https://unpkg.com/skinview3d@3.0.0/bundles/skinview3d.bundle.js"></script>
 
 <style>
+:root{
+ --bg1:#020617;
+ --bg2:#0f172a;
+ --border:#1e293b;
+ --gold:#f5c542;
+}
+
+*{box-sizing:border-box}
+
 body{
-  margin:0;
-  font-family:Inter,Arial,Helvetica,sans-serif;
-  background:linear-gradient(180deg,#0b1220,#020617);
-  color:#eaeaea;
+ margin:0;
+ font-family:Inter,system-ui,Arial;
+ background:linear-gradient(180deg,#020617,#000);
+ color:#e5e7eb;
 }
 
-header{
-  padding:24px 28px;
+header{padding:26px}
+
+h1{
+ margin:0;
+ font-size:30px;
+ font-weight:900;
+ display:flex;
+ align-items:center;
+ gap:14px;
 }
 
-header h1{
-  margin:0;
-  font-size:28px;
-  font-weight:900;
+.discord{
+ margin-left:auto;
+ font-size:26px;
+ text-decoration:none;
+ color:#5865F2;
+ transition:.2s;
 }
+.discord:hover{transform:scale(1.15)}
 
 header p{
-  margin:6px 0 0;
-  color:#94a3b8;
-  font-size:13px;
+ margin:6px 0 12px;
+ color:#94a3b8;
+ font-size:13px;
+}
+
+.search{
+ padding:10px 14px;
+ width:260px;
+ border-radius:999px;
+ border:1px solid var(--border);
+ background:#020617;
+ color:#fff;
+ font-weight:700;
+ outline:none;
 }
 
 .tabs{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:18px;
+ display:flex;
+ flex-wrap:wrap;
+ gap:10px;
+ margin-top:14px;
 }
 
 .tab{
-  padding:8px 14px;
-  border-radius:999px;
-  background:#020617;
-  border:1px solid #1e293b;
-  color:#94a3b8;
-  font-weight:800;
-  font-size:13px;
-  cursor:pointer;
-  transition:.2s;
+ padding:8px 16px;
+ border-radius:999px;
+ background:var(--bg1);
+ border:1px solid var(--border);
+ font-weight:800;
+ font-size:13px;
+ color:#94a3b8;
+ cursor:pointer;
+ transition:.2s;
 }
 
 .tab:hover,.tab.active{
-  background:#1e293b;
-  color:#fff;
+ background:#1e293b;
+ color:#fff;
 }
 
-.container{
-  padding:20px 28px;
-}
+.container{padding:10px 26px 40px}
 
 .row{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  background:linear-gradient(90deg,#0f172a,#020617);
-  border-radius:16px;
-  padding:18px;
-  margin-bottom:14px;
-  animation:fade .3s ease;
+ display:flex;
+ align-items:center;
+ gap:18px;
+ background:linear-gradient(90deg,var(--bg2),var(--bg1));
+ border-radius:18px;
+ padding:18px;
+ margin-bottom:14px;
+ transition:.25s ease;
 }
 
-@keyframes fade{
-  from{opacity:0;transform:translateY(6px)}
-  to{opacity:1;transform:none}
+.row:hover{
+ transform:translateY(-4px) scale(1.01);
+ box-shadow:0 0 40px rgba(245,197,66,.12);
 }
 
 .num{
-  width:32px;
-  font-size:20px;
-  font-weight:900;
-  color:#facc15;
-  text-align:center;
+ width:36px;
+ text-align:center;
+ font-size:22px;
+ font-weight:900;
+ color:var(--gold);
 }
 
 .player{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  min-width:260px;
+ display:flex;
+ align-items:center;
+ gap:14px;
+ min-width:260px;
 }
 
-.avatar{
-  width:52px;
-  height:52px;
-  border-radius:12px;
-  overflow:hidden;
-  background:#020617;
-  border:1px solid #1e293b;
+.skin3d{
+ width:64px;
+ height:64px;
+ border-radius:14px;
+ border:1px solid var(--border);
+ background:#020617;
 }
 
-.avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.player-name{
-  font-weight:900;
-  font-size:16px;
-}
-
-.subtitle{
-  font-size:12px;
-  color:#94a3b8;
-}
+.player-name{font-size:17px;font-weight:900}
+.subtitle{font-size:12px;color:#94a3b8}
 
 .region{
-  margin-left:auto;
-  margin-right:24px;
+ margin-left:auto;
+ margin-right:20px;
 }
 
 .region span{
-  background:#7f1d1d;
-  color:#fecaca;
-  font-weight:800;
-  font-size:11px;
-  padding:6px 12px;
-  border-radius:999px;
+ padding:6px 14px;
+ border-radius:999px;
+ background:#7f1d1d;
+ color:#fecaca;
+ font-size:11px;
+ font-weight:900;
 }
 
 .tiers{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
+ display:flex;
+ flex-wrap:wrap;
+ gap:12px;
 }
 
 .pill{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:6px 10px;
-  border-radius:999px;
-  background:#020617;
-  border:1px solid #1e293b;
-  font-size:12px;
-  font-weight:800;
+ width:62px;
+ height:62px;
+ border-radius:50%;
+ background:#020617;
+ border:1px solid var(--border);
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ gap:4px;
+ font-size:11px;
+ font-weight:900;
+ transition:.25s;
 }
 
-.icon{
-  font-size:14px;
+.pill:hover{transform:scale(1.12)}
+
+.icon{font-size:18px}
+
+/* TIERS */
+.ht1{
+ color:var(--gold);
+ text-shadow:0 0 10px var(--gold);
+ border:2px solid var(--gold);
+ animation:goldPulse 1.8s infinite alternate;
 }
 
-/* COLORES DE RANGO */
-.ht1{color:#22c55e}
-.lt1{color:#facc15}
-.ht2{color:#a855f7}
-.lt2{color:#38bdf8}
-.ht3{color:#fb7185}
+@keyframes goldPulse{
+ from{box-shadow:0 0 8px var(--gold)}
+ to{box-shadow:0 0 18px var(--gold)}
+}
+
+.lt1{color:#facc15;text-shadow:0 0 8px #facc15}
+.ht2{color:#a855f7;text-shadow:0 0 8px #a855f7}
+.lt2{color:#38bdf8;text-shadow:0 0 8px #38bdf8}
+.ht3{color:#fb7185;text-shadow:0 0 8px #fb7185}
 
 footer{
-  padding:16px;
-  text-align:center;
-  font-size:12px;
-  color:#64748b;
+ text-align:center;
+ padding:18px;
+ font-size:12px;
+ color:#64748b;
 }
+
+/* oculto audio */
+audio{display:none}
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>Overall Rankings</h1>
-  <p>Server IP: <strong>mcpvp.club</strong></p>
+ <h1>
+  Overall Rankings
+  <a class="discord" href="https://discord.gg/TUINVITEAQUI" target="_blank">💬</a>
+ </h1>
 
-  <div class="tabs">
-    <div class="tab active" data-mode="overall">Overall</div>
-    <div class="tab" data-mode="classic">Classic</div>
-    <div class="tab" data-mode="uhc">UHC</div>
-    <div class="tab" data-mode="bedfight">Bedfight</div>
-    <div class="tab" data-mode="gapple">Gapple</div>
-    <div class="tab" data-mode="soup">Soup</div>
-    <div class="tab" data-mode="axepvp">AxePvP</div>
-    <div class="tab" data-mode="nodebuff">NoDebuff</div>
-    <div class="tab" data-mode="sumo">Sumo</div>
-  </div>
+ <p>Server IP: <b>mcpvp.club</b></p>
+
+ <input class="search" id="search" placeholder="Buscar jugador...">
+
+ <div class="tabs">
+  <div class="tab active" data-mode="overall">Overall</div>
+  <div class="tab" data-mode="classic">Classic</div>
+  <div class="tab" data-mode="uhc">UHC</div>
+  <div class="tab" data-mode="bedfight">Bedfight</div>
+  <div class="tab" data-mode="gapple">Gapple</div>
+  <div class="tab" data-mode="soup">Soup</div>
+  <div class="tab" data-mode="axepvp">AxePvP</div>
+  <div class="tab" data-mode="nodebuff">NoDebuff</div>
+  <div class="tab" data-mode="sumo">Sumo</div>
+ </div>
 </header>
 
 <div class="container" id="list"></div>
 
-<footer>© 2026 · MCTiers Style</footer>
+<footer>© 2026 · PvP Rankings</footer>
+
+<audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
 
 <script>
 const icons={
- classic:'⚔️',
- uhc:'❤️',
- bedfight:'🛏️',
- gapple:'🍎',
- soup:'🍲',
- axepvp:'🪓',
- nodebuff:'🧪',
- sumo:'🧵'
+ classic:'⚔️',uhc:'❤️',bedfight:'🛏️',gapple:'🍎',
+ soup:'🍲',axepvp:'🪓',nodebuff:'🧪',sumo:'🧵'
 };
 
 const score={HT1:1,LT1:2,HT2:3,LT2:4,HT3:5};
@@ -209,66 +245,81 @@ const players=[
  {name:'Know_exe',tiers:{classic:'LT2',uhc:'LT2',bedfight:'HT3',gapple:'LT2',soup:'LT2',axepvp:'HT3',nodebuff:'LT2',sumo:'LT2'}}
 ];
 
-function render(mode){
+let currentMode='overall';
+
+function render(){
+ const q=document.getElementById('search').value.toLowerCase();
  const box=document.getElementById('list');
  box.innerHTML='';
- let list=[...players];
 
- if(mode!=='overall'){
-  list.sort((a,b)=>{
-    const ta=a.tiers[mode]||'HT3';
-    const tb=b.tiers[mode]||'HT3';
-    return score[ta]-score[tb];
-  });
+ let list=players.filter(p=>p.name.toLowerCase().includes(q));
+
+ if(currentMode!=='overall'){
+  list.sort((a,b)=>score[a.tiers[currentMode]]-score[b.tiers[currentMode]]);
  }
 
  list.forEach((p,i)=>{
+  const id=`skin-${p.name}`;
   box.innerHTML+=`
   <div class="row">
-    <div class="num">${i+1}</div>
+   <div class="num">${i+1}</div>
 
-    <div class="player">
-      <div class="avatar">
-        <img src="https://mc-heads.net/avatar/${p.name}/64">
-      </div>
-      <div>
-        <div class="player-name">${p.name}</div>
-        <div class="subtitle">Combat Player</div>
-      </div>
+   <div class="player">
+    <canvas class="skin3d" id="${id}"></canvas>
+    <div>
+     <div class="player-name">${p.name}</div>
+     <div class="subtitle">PvP Player</div>
     </div>
+   </div>
 
-    <div class="region"><span>NA</span></div>
+   <div class="region"><span>NA</span></div>
 
-    <div class="tiers">
-      ${
-        mode==='overall'
-        ? Object.entries(p.tiers).map(([m,t])=>`
-          <div class="pill">
-            <span class="icon">${icons[m]}</span>
-            <span class="${t.toLowerCase()}">${t}</span>
-          </div>
-        `).join('')
-        : `
-          <div class="pill">
-            <span class="icon">${icons[mode]}</span>
-            <span class="${p.tiers[mode].toLowerCase()}">${p.tiers[mode]}</span>
-          </div>
-        `
-      }
-    </div>
+   <div class="tiers">
+    ${
+     currentMode==='overall'
+     ? Object.entries(p.tiers).map(([m,t])=>`
+      <div class="pill ${t.toLowerCase()}">
+       <div class="icon">${icons[m]}</div>
+       <div>${t}</div>
+      </div>`).join('')
+     : `<div class="pill ${p.tiers[currentMode].toLowerCase()}">
+        <div class="icon">${icons[currentMode]}</div>
+        <div>${p.tiers[currentMode]}</div>
+       </div>`
+    }
+   </div>
   </div>`;
+
+  setTimeout(()=>loadSkin(id,p.name),50);
  });
 }
 
-render('overall');
+function loadSkin(id,name){
+ const v=new skinview3d.SkinViewer({
+  canvas:document.getElementById(id),
+  width:64,height:64,
+  skin:`https://mc-heads.net/skin/${name}`
+ });
+ v.animation=new skinview3d.RotatingAnimation();
+ v.animation.speed=.6;
+ v.controls.enableRotate=false;
+ v.controls.enableZoom=false;
+ v.zoom=.9;
+}
 
 document.querySelectorAll('.tab').forEach(tab=>{
  tab.onclick=()=>{
+  document.getElementById('clickSound').play();
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   tab.classList.add('active');
-  render(tab.dataset.mode);
+  currentMode=tab.dataset.mode;
+  render();
  };
 });
+
+document.getElementById('search').oninput=render;
+
+render();
 </script>
 
 </body>
